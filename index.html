@@ -473,6 +473,14 @@
     <script src="assets/playervimeo/vimeo_player.js"></script>
     <script src="assets/scrollgallery/scroll-gallery.js"></script>
     <script src="assets/theme/js/script.js"></script>
+    <script>
+    // Prevent spacebar from scrolling the page
+    window.addEventListener('keydown', function(event) {
+        if (event.key === " " || event.keyCode === 32) {
+                     event.preventDefault();
+        }
+    });
+</script>
     
     <!-- Embed Karabo AI Chatbot (Isolated section) -->
     <div id="chatbot-container"></div>
