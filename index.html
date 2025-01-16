@@ -15,6 +15,24 @@
   
   
   <title>BorneLabs</title>
+	<!-- CSS for the chatbot in an isolated section -->
+    <style>
+        /* Isolated style for the Karabo AI chatbot */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px; /* Distance from the bottom */
+            right: 20px;  /* Distance from the right */
+            width: 300px; /* Width of the chatbot */
+            height: 500px; /* Height of the chatbot */
+            z-index: 1000; /* Ensure it's above other elements */
+            background-color: white; /* Optional: set a background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow */
+            border-radius: 10px; /* Optional: round the corners */
+            overflow: hidden; /* Ensure content doesn't overflow */
+        }
+    </style>
+
+	
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
@@ -477,10 +495,10 @@
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
     <input name="animation" type="hidden">
 
-	   <!-- Embed Karabo AI Chatbot -->
+    <!-- Embed Karabo AI Chatbot (Isolated section) -->
     <div id="chatbot-container"></div>
     <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
     <script src="https://karabo.ai/smart-js-chatbot-link/007abf13-d803-467e-a0c7-520ae147cfb2/"></script>
-
+	
   </body>
 </html>
