@@ -473,27 +473,6 @@
     <script src="assets/playervimeo/vimeo_player.js"></script>
     <script src="assets/scrollgallery/scroll-gallery.js"></script>
     <script src="assets/theme/js/script.js"></script>
-    
-    <!-- Embed Karabo AI Chatbot (Isolated section) -->
-    <div id="chatbot-container"></div>
-    <script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
-    <script src="https://karabo.ai/smart-js-chatbot-link/007abf13-d803-467e-a0c7-520ae147cfb2/"></script>
-
-    <script>
-    // Prevent spacebar scrolling for the whole page
-    document.addEventListener('keydown', function(event) {
-        // Check if the spacebar is pressed
-        if (event.key === " " || event.keyCode === 32) {
-            // If the target is an input field, allow spacebar for typing
-            if (event.target.tagName === "TEXTAREA" || (event.target.tagName === "INPUT" && event.target.type === "text")) {
-                return; // Let the spacebar function normally in text fields
-            }
-            // Prevent the default behavior (scrolling the page)
-            event.preventDefault();
-        }
-    });
-</script>
-
 	
   </body>
 </html>
