@@ -6,7 +6,6 @@
 
   async function loadPage(page) {
     if (!content) return;
-
     const file = `Pages/${page.toLowerCase()}.html`;
 
     try {
@@ -15,11 +14,17 @@
 
       content.innerHTML = await res.text();
 
-      // Call any page-specific functions
       if (typeof loadFeaturedProjects === "function") loadFeaturedProjects();
 
-      // Reset main scroll to top
       if (main) main.scrollTo({ top: 0, behavior: "auto" });
+
+      let link = document.querySelector("link[rel='canonical']");
+      if (!link) {
+        link = document.createElement("link");
+        link.setAttribute("rel", "canonical");
+        document.head.appendChild(link);
+      }
+      link.setAttribute("href", `https://www.bornelabs.org/${page.toLowerCase()}`);
 
     } catch (err) {
       content.innerHTML = `<div class="p-3 text-danger">Could not load "${file}"</div>`;
@@ -29,69 +34,53 @@
 
   function scrollToSection(id) {
     if (!main) return;
-
     const section = document.getElementById(id);
     if (!section) return;
-
-    const offset = 70; // optional offset for headers
-    const y = section.offsetTop - offset;
-
-    main.scrollTo({
-      top: y,
-      behavior: "smooth"
-    });
+    const offset = 70;
+    main.scrollTo({ top: section.offsetTop - offset, behavior: "smooth" });
   }
 
   function router() {
-    const hash = location.hash.replace("#", "");
+    let path = location.pathname.replace("/", "");
+    if (!path || path === "index.html") path = "Home";
 
-    if (!hash) {
-      loadPage("Home");
-      return;
+    const hash = location.hash.replace("#", "");
+    let sectionId;
+    if (hash) {
+      const parts = hash.split(":");
+      path = parts[0];
+      sectionId = parts[1];
     }
 
-    const [page, sectionId] = hash.split(":"); // handle #page:section
-
-    loadPage(page).then(() => {
+    loadPage(path).then(() => {
       if (sectionId) scrollToSection(sectionId);
     });
   }
 
   function initNavigation() {
     document.addEventListener("click", e => {
-
-      // Handle elements with data-page (including small cards)
       const pageLink = e.target.closest("[data-page]");
       if (pageLink) {
         e.preventDefault();
-
         const page = pageLink.dataset.page;
-        const section = pageLink.dataset.section; // optional target section
-
+        const section = pageLink.dataset.section;
         location.hash = page + (section ? ":" + section : "");
-
         document.querySelectorAll("[data-page]").forEach(el => el.classList.remove("active"));
         pageLink.classList.add("active");
-
-        // Close mobile menu if open
         const menu = document.getElementById("mobileMenu");
         if (menu?.classList.contains("show")) {
           bootstrap.Collapse.getInstance(menu)?.hide();
         }
-
         return;
       }
 
-      // Handle standard anchor links with hashes
       const tagLink = e.target.closest('a[href^="#"]');
       if (tagLink) {
         const id = tagLink.getAttribute("href").replace("#", "");
         const section = document.getElementById(id);
-
         if (section) {
           e.preventDefault();
           scrollToSection(id);
-
           document.querySelectorAll(".tag-link").forEach(el => el.classList.remove("active"));
           tagLink.classList.add("active");
         }
@@ -102,7 +91,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     initNavigation();
     router();
-
     window.addEventListener("hashchange", router);
   });
 
