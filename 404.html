@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/media/Favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/media/Favicon.png">
+    <title>Bornelabs</title>
+</head>
+<body>
+    <div class="container-fluid layout rounded h-100 ">
+        <div class="row g-0 d-none d-md-flex" style="border-bottom:2px solid #c7c7c7;">
+            <div class="col p-2 d-flex align-items-left justify-content-left Title">
+                <img src="assets/media/BornelabsLogo.png" class="logo me-2" alt="Bornelabs logo">
+                <span class="navbar-brand fw-bold text-dark mb-0" id="bornelabs">Bornelabs</span>
+            </div>
+        </div>
+
+        <div class="row h-100 g-0 flex-nowrap" style="background:white;">
+            <div class="col-auto d-none d-md-block p-0">
+                <nav class="sidebar d-flex flex-column h-100 p-1">
+                    <ul class="nav flex-column gap-2 flex-grow-1 NavLinks">
+                        <li class="nav-item p-1">
+                            <a href="#Home" class="nav-link active rounded fw-bold" data-page="Home">
+                                <i class="bi bi-house-door me-2"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a href="#Projects" class="nav-link rounded fw-bold" data-page="Projects">
+                                <i class="bi bi-kanban me-2"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a href="#Services" class="nav-link rounded fw-bold" data-page="Services">
+                                <i class="bi bi-gear me-2"></i> Services
+                            </a>
+                        </li>
+
+                        <li class="nav-item p-1">
+                            <a href="#Contacts" class="nav-link rounded fw-bold" data-page="Contacts">
+                                <i class="bi bi-telephone me-2"></i> Contacts
+                            </a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a href="#About" class="nav-link rounded fw-bold" data-page="About">
+                                <i class="bi bi-info-circle me-2"></i> About
+                            </a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a href="#More" class="nav-link rounded fw-bold" data-page="More">
+                                <i class="bi bi-three-dots me-2"></i> More
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col d-flex flex-column h-100 p-0">
+                <div class="d-md-none">
+                    <nav class="navbar navbar-light bg-light p-2">
+                        <div class="d-flex align-items-center w-100">
+                            <img src="assets/media/BornelabsLogo.png" class="logo me-2" alt="Bornelabs logo">
+                            <span class="navbar-brand fw-bold mb-0">Bornelabs</span>
+                            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                        <div class="collapse" id="mobileMenu">
+                            <ul class="nav flex-column mt-3">
+                                <li class="nav-item p-1">
+                                    <a href="#Home" class="nav-link active rounded fw-bold" data-page="Home">Home</a>
+                                </li>
+                                <li class="nav-item p-1">
+                                    <a href="#Projects" class="nav-link rounded fw-bold" data-page="Projects">Projects</a>
+                                </li>
+                                <li class="nav-item p-1">
+                                <a href="#Services" class="nav-link rounded fw-bold" data-page="Services">Services</a> 
+                                </li>
+                                <li class="nav-item p-1">
+                                    <a href="#Contacts" class="nav-link rounded fw-bold" data-page="Contacts">Contacts</a>
+                                </li>
+                                <li class="nav-item p-1">
+                                    <a href="#About" class="nav-link rounded fw-bold" data-page="About">About</a>
+                                </li>
+                                <li class="nav-item p-1">
+                                    <a href="#More" class="nav-link rounded fw-bold" data-page="More">More</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="main flex-grow-1 mb-5">
+                    <div id="content" data-include="Pages/home.html">
+                        <div class="d-flex justify-content-center align-items-center text-start py-3 px-2 g-5">
+                            <div class="spinner-border me-2" role="status" aria-hidden="true"></div>
+                            <strong>Loading</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/include.js"></script>
+    <script src="assets/js/featured.js"></script>
+    <script src="assets/js/tags.js"></script>
+    <script src="assets/js/youtube.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
