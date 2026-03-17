@@ -1,0 +1,208 @@
+<section class="py-1 px-1 d-flex justify-content-between align-items-center w-100">
+    <h1 class="mb-0">Home</h1>
+    <div class="d-flex align-items-center gap-3">
+        <a href="https://www.linkedin.com/company/bornelabs" class="text-dark fs-4 d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb06NZiHltYEOS61j33O" class="text-dark fs-4 d-flex align-items-center justify-content-center"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://github.com/BorneLabs" class="text-dark fs-4 d-flex align-items-center justify-content-center"><i class="bi bi-github"></i></a>
+        <a href="https://www.youtube.com/@BorneLabs" class="text-dark fs-4 d-flex align-items-center justify-content-center"><i class="bi bi-youtube"></i></a>
+    </div>
+</section>
+
+<hr>
+
+<div class="position-relative d-flex align-items-center justify-content-center text-center text-white px-1 mb-5" style="height:500px;background:url('assets/media/hero.jpg') center/cover no-repeat;">
+      <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+      <div class="position-relative px-3" style="max-width:800px;">
+            <h1 class="fw-bold display-4 mb-3">We Do Projects</h1>
+            <p class="fs-5 mb-4">If you’re interested in joining our team, we’d love to hear from you.</p>
+            <p class="small text-white-50">Email us at bornelabs.org@gmail.com</p>
+      </div>
+</div>
+
+<section class="py-5 px-2" id="Home-Services">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- PROJECTS WE DO CARD -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 border-secondary fw-bold">
+          <div class="card-header bg-dark text-white">
+            <h5 class="fw-bold mb-1">
+              <i class="bi bi-rocket-takeoff me-2"></i>Projects We Do
+            </h5>
+          </div>
+
+          <div class="card-body fw-bold d-flex flex-column gap-2">
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="Websites">
+              <i class="bi bi-laptop"></i>
+              <span>Static & Fullstack Websites</span>
+            </div>
+
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="Mobile-Apps">
+              <i class="bi bi-phone"></i>
+              <span>Native Mobile Apps & PWAs</span>
+            </div>
+
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="AI-Integration">
+              <i class="bi bi-robot"></i>
+              <span>AI Inference & Integration</span>
+            </div>
+
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="Open-Source-Collaboration">
+              <i class="bi bi-github"></i>
+              <span>Collaborative Open Source</span>
+            </div>
+
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="Project-Management">
+              <i class="bi bi-people"></i>
+              <span>Project Management & Partnerships</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OTHER SERVICES CARD -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 border-secondary fw-bold">
+          <div class="card-header bg-dark text-white">
+            <h5 class="fw-bold mb-1">
+              <i class="bi bi-gear me-2"></i>Other Services
+            </h5>
+          </div>
+
+          <div class="card-body fw-bold d-flex flex-column gap-2">
+            <div class="p-2 border border-secondary rounded d-flex align-items-center gap-2 text-start small-card"
+                 data-page="services" data-section="Graphic-Design">
+              <i class="bi bi-palette"></i>
+              <span>Graphic Design</span>
+            </div>
+
+            <div class="mt-auto">
+              <a data-page="services" class="btn btn-dark btn-lg d-flex align-items-center gap-2 w-100 justify-content-center">
+                <i class="bi bi-rocket me-2"></i>Hire Our Services
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="featured-container py-5 px-2" id="Home-Featured-Projects" style="color:#1f1f1f;font-family:sans-serif;font-size:1.25rem;">
+  <div class="container p-0">
+    <h3 class="text-center fw-bold mb-0">Featured Projects</h3>
+    <hr class="my-0">
+    <div id="featured-projects" class="row g-4 mt-4 justify-content-center mx-auto"></div>
+  </div>
+
+  <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+      <div class="modal-content" style="max-height:90vh;">
+        <div class="modal-body p-0 overflow-hidden position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+          <div class="p-4" id="modalContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 px-2" id="Home-Education">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4">Education Resources</h3>
+    <hr class="mb-5">
+
+    <div class="row g-4 justify-content-center" id="video-cards"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"></button>
+
+          <div class="ratio ratio-16x9">
+            <iframe id="modalVideo" src="" title="YouTube video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="py-5 px-2" id="Home-Plans">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4">Want us to work on your Projects?</h3>
+    <hr class="mb-5">
+
+    <div class="row g-3">
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-secondary">
+          <div class="card-header bg-dark text-white">
+            <h5 class="fw-bold mb-1">
+              <i class="bi bi-people-fill me-2"></i>Community Collaboration
+            </h5>
+            <small class="text-light">Open Source</small>
+          </div>
+
+          <div class="card-body">
+            <p class="mb-0 fw-semibold">
+              Have an open-source project underway? We offer our help free to
+              support the community and promote innovation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-secondary">
+          <div class="card-header bg-dark text-white">
+            <h5 class="fw-bold mb-1">
+              <i class="bi bi-currency-dollar me-2"></i>Revenue Partnership
+            </h5>
+            <small class="text-light">Free Build</small>
+          </div>
+
+          <div class="card-body">
+            <p class="mb-0 fw-semibold">
+              Want a full-service build? We develop your project at no upfront
+              cost and share in revenue if it succeeds.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 border-secondary">
+          <div class="card-header bg-dark text-white">
+            <h5 class="fw-bold mb-1">
+              <i class="bi bi-lightning-fill me-2"></i>Express Build
+            </h5>
+            <small class="text-light">Price by Request</small>
+          </div>
+
+          <div class="card-body">
+            <p class="mb-0 fw-semibold">
+              Need a fast build? Start with a 30% deposit and pay the rest when
+              the project is delivered.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

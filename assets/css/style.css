@@ -1,0 +1,191 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: white;
+   
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.tag-link .card{
+transition:all .2s ease;
+}
+
+.tag-link.active .card{
+background:#1f1f1f;
+color:white;
+border-color:#1f1f1f;
+}
+
+.tag-link.active i{
+color:white;
+}
+
+.layout {
+    height: 100vh;
+    height: 100dvh;
+}
+
+.container-fluid.layout {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1rem;
+}
+
+.row.h-100 {
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.sidebar {
+    width:200px;
+    flex:0 0 200px;
+    height: 100%;
+    padding: 0.5rem 1rem;
+
+}
+.mobileMenu{
+    background: white;
+
+}
+
+.NavLinks {
+    background: white ;
+    border-right: 1px solid #c7c7c7;
+}
+
+
+.nav a {
+    font-size: 1.2rem;
+   
+}
+
+.main{
+  background:white;
+  color:#1f1f1f;
+  flex-grow:1;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.main{
+    background:white;
+    color:#1f1f1f;
+    flex-grow:1;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.main::-webkit-scrollbar{
+    width:6px;
+}
+.main::-webkit-scrollbar-track{
+    background:transparent;
+}
+.main::-webkit-scrollbar-thumb{
+    background-color:rgba(0,0,0,0.3);
+    border-radius:3px;
+}
+.main{
+    scrollbar-width:thin;
+    scrollbar-color:rgba(0,0,0,0.3) transparent;
+}
+
+.small-card {
+    font-size: 0.875rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+
+.logo {
+    width: 40px;
+    height: auto;
+    display: block;
+}
+
+#bornelabs {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #1f1f1f !important;
+    padding: 0.5rem 1rem;
+}
+
+.row.g-0 > [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.project-card {
+  border-radius: 5px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card .project-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.project-card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  min-height: calc(1.4em * 2);
+  word-break: break-word;
+  font-size: 0.9rem;
+}
+
+.project-card .card-body {
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.project-card h5,
+.project-card p {
+  margin: 0;
+}
+
+.project-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        height: auto;
+        width: 200px;
+    }
+
+    .main {
+        border-left: none;
+    }
+}
