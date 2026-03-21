@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.bornelabs.org/</loc>
@@ -28,7 +27,7 @@
   <url>
     <loc>https://www.bornelabs.org/projects</loc>
     <priority>0.85</priority>
-    <changefreq>bi-weekly</changefreq>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.bornelabs.org/papers</loc>
