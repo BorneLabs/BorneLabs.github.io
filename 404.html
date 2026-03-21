@@ -2,13 +2,60 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0;url=/">
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <title>Loading...</title>
   <script>
+    // Preserve the requested path and redirect to home
     (function () {
       var path = window.location.pathname;
-      var clean = path.replace(/^\/+/, "");
-      window.location.replace("/#" + clean);
+      var search = window.location.search;
+      var hash = window.location.hash;
+      
+      // Always redirect to home, preserving the original path
+      var redirectUrl = '/?r=' + encodeURIComponent(path) + search + hash;
+      window.location.replace(redirectUrl);
     })();
   </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica',
+        'Arial', sans-serif;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .loading {
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
-<body></body>
+<body>
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+</body>
 </html>

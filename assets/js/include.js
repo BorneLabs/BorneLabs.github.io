@@ -10,7 +10,13 @@
 
     try {
       const res = await fetch(`${file}?v=${Date.now()}`, { cache: "no-store" });
-      if (!res.ok) throw new Error(res.status);
+      if (!res.ok) {
+        // If page doesn't exist, load Home instead
+        if (page.toLowerCase() !== "home") {
+          return loadPage("Home");
+        }
+        throw new Error(res.status);
+      }
 
       content.innerHTML = await res.text();
 
@@ -41,20 +47,50 @@
   }
 
   function router() {
-    let path = location.pathname.replace("/", "");
-    if (!path || path === "index.html") path = "Home";
-
-    const hash = location.hash.replace("#", "");
+    let path = location.pathname.replace(/^\/+/, "").replace(/\/$/, "");
+    
+    // Handle root path
+    if (!path || path === "index.html") {
+      path = "Home";
+    }
+    
+    // Extract page and section from path (e.g., "services/websites" -> page: "services", section: "websites")
     let sectionId;
-    if (hash) {
-      const parts = hash.split(":");
+    if (path.includes('/')) {
+      const parts = path.split('/');
       path = parts[0];
       sectionId = parts[1];
     }
 
+    // Validate that path is a valid page name (alphanumeric/dash only, no suspicious patterns)
+    if (!/^[a-zA-Z0-9\-]+$/.test(path)) {
+      path = "Home";
+      sectionId = undefined;
+    }
+
     loadPage(path).then(() => {
       if (sectionId) scrollToSection(sectionId);
+      updateActiveNav(path);
     });
+  }
+
+  function updateActiveNav(page) {
+    // Update data-page navigation links
+    document.querySelectorAll("[data-page]").forEach(el => {
+      const pageAttr = el.dataset.page.toLowerCase();
+      const currentPage = page.toLowerCase();
+      if (pageAttr === currentPage) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    });
+  }
+
+  function navigateTo(page, section) {
+    const path = section ? `/${page.toLowerCase()}/${section.toLowerCase()}` : `/${page.toLowerCase()}`;
+    history.pushState({ page, section }, "", path);
+    router();
   }
 
   function initNavigation() {
@@ -64,9 +100,7 @@
         e.preventDefault();
         const page = pageLink.dataset.page;
         const section = pageLink.dataset.section;
-        location.hash = page + (section ? ":" + section : "");
-        document.querySelectorAll("[data-page]").forEach(el => el.classList.remove("active"));
-        pageLink.classList.add("active");
+        navigateTo(page, section);
         const menu = document.getElementById("mobileMenu");
         if (menu?.classList.contains("show")) {
           bootstrap.Collapse.getInstance(menu)?.hide();
@@ -81,6 +115,9 @@
         if (section) {
           e.preventDefault();
           scrollToSection(id);
+          // Update URL without page reload
+          const currentPage = location.pathname.split('/')[1] || 'home';
+          history.replaceState({ page: currentPage, section: id }, "", `/${currentPage}/${id}`);
           document.querySelectorAll(".tag-link").forEach(el => el.classList.remove("active"));
           tagLink.classList.add("active");
         }
@@ -89,9 +126,38 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Handle redirect from 404.html using query parameter
+    const params = new URLSearchParams(window.location.search);
+    const redirectPath = params.get('r');
+    if (redirectPath) {
+      // Clean up the redirect parameter
+      params.delete('r');
+      const newSearch = params.toString();
+      const newUrl = redirectPath + (newSearch ? '?' + newSearch : '');
+      history.replaceState(null, "", newUrl);
+      // After updating the URL in history, parse the redirectPath for routing
+      let path = redirectPath.replace(/^\/+/, "").replace(/\/$/, "");
+      if (!path || path === "index.html") path = "Home";
+      
+      let sectionId;
+      if (path.includes('/')) {
+        const parts = path.split('/');
+        path = parts[0];
+        sectionId = parts[1];
+      }
+      
+      initNavigation();
+      loadPage(path).then(() => {
+        if (sectionId) scrollToSection(sectionId);
+        updateActiveNav(path);
+      });
+      window.addEventListener("popstate", router);
+      return;
+    }
+    
     initNavigation();
     router();
-    window.addEventListener("hashchange", router);
+    window.addEventListener("popstate", router);
   });
 
 })();
