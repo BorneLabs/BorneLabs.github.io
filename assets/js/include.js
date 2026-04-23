@@ -4,6 +4,30 @@
   const content = document.getElementById('content');
   const main = document.querySelector('.main');
 
+  function getCurrentPageFromPath() {
+    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
+    if (!path || path === 'index.html') return 'home';
+    return path.split('/')[0].toLowerCase();
+  }
+
+  function getRouteFromPath() {
+    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
+
+    if (!path || path === 'index.html') {
+      return { page: 'home', sectionId: '' };
+    }
+
+    const parts = path.split('/');
+    const page = (parts[0] || 'home').toLowerCase();
+    const sectionId = (parts[1] || '').toLowerCase();
+
+    if (!/^[a-zA-Z0-9\-]+$/.test(page)) {
+      return { page: 'home', sectionId: '' };
+    }
+
+    return { page, sectionId };
+  }
+
   function setCanonical(pageName) {
     let link = document.querySelector("link[rel='canonical']");
 
@@ -31,7 +55,6 @@
       });
 
       if (!res.ok) {
-        if (pageName !== 'home') return loadPage('home');
         throw new Error(`HTTP ${res.status}`);
       }
 
@@ -49,14 +72,12 @@
       setCanonical(pageName);
       return pageName;
     } catch (err) {
-      if (pageName !== 'home') return loadPage('home');
-
       content.innerHTML = `
         <div class="p-3 text-danger">
           Could not load "${file}" - ${err.message}
         </div>
       `;
-      return 'home';
+      return pageName;
     }
   }
 
@@ -95,29 +116,11 @@
     router();
   }
 
-  function parseRoute() {
-    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
-
-    if (!path || path === 'index.html') {
-      return { page: 'home', sectionId: '' };
-    }
-
-    const parts = path.split('/');
-    const page = parts[0] || 'home';
-    const sectionId = parts[1] || '';
-
-    if (!/^[a-zA-Z0-9\-]+$/.test(page)) {
-      return { page: 'home', sectionId: '' };
-    }
-
-    return { page, sectionId };
-  }
-
   async function router() {
-    const { page, sectionId } = parseRoute();
+    const { page, sectionId } = getRouteFromPath();
     const loadedPage = await loadPage(page);
 
-    if (sectionId) {
+    if (sectionId && loadedPage === 'services') {
       requestAnimationFrame(() => scrollToSection(sectionId));
     }
 
@@ -127,7 +130,6 @@
   function initNavigation() {
     document.addEventListener('click', e => {
       const pageLink = e.target.closest('[data-page]');
-
       if (pageLink) {
         e.preventDefault();
 
@@ -145,29 +147,35 @@
       }
 
       const tagLink = e.target.closest('a[href^="#"]');
-
       if (tagLink) {
         const id = tagLink.getAttribute('href').replace('#', '');
-        const section = document.getElementById(id);
+        if (!id) return;
 
-        if (section) {
-          e.preventDefault();
+        e.preventDefault();
 
-          scrollToSection(id);
+        const currentPage = getCurrentPageFromPath();
 
-          const currentPage = location.pathname.split('/')[1] || 'home';
-          history.replaceState(
-            { page: currentPage, section: id },
+        if (currentPage !== 'services') {
+          history.pushState(
+            { page: 'services', section: id },
             '',
-            `/${currentPage}/${id}`
+            `/services/${id}`
           );
-
-          document.querySelectorAll('.tag-link').forEach(el => {
-            el.classList.remove('active');
-          });
-
-          tagLink.classList.add('active');
+          router();
+        } else {
+          history.replaceState(
+            { page: 'services', section: id },
+            '',
+            `/services/${id}`
+          );
+          scrollToSection(id);
         }
+
+        document.querySelectorAll('.tag-link').forEach(el => {
+          el.classList.remove('active');
+        });
+
+        tagLink.classList.add('active');
       }
     });
   }
@@ -180,7 +188,6 @@
       params.delete('r');
       const newSearch = params.toString();
       const newUrl = redirectPath + (newSearch ? `?${newSearch}` : '');
-
       history.replaceState(null, '', newUrl);
     }
 

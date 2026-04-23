@@ -1,37 +1,59 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-const tags=document.querySelectorAll(".tag-link");
-const sections=document.querySelectorAll("section[id]");
+  const tags = document.querySelectorAll(".tag-link");
+  const sections = document.querySelectorAll("section[id]");
+  const main = document.querySelector(".main");
 
-function setActive(id){
+  // ======================
+  // SET ACTIVE TAG
+  // ======================
+  function setActive(id) {
+    tags.forEach(tag => {
+      tag.classList.toggle(
+        "active",
+        tag.getAttribute("href") === "#" + id
+      );
+    });
+  }
 
-tags.forEach(tag=>{
-tag.classList.remove("active");
+  // ======================
+  // SCROLL SYNC
+  // ======================
+  function handleScroll() {
+    let current = "";
 
-if(tag.getAttribute("href")==="#"+id){
-tag.classList.add("active");
-}
+    const scrollPos = main ? main.scrollTop : window.scrollY;
 
-});
+    sections.forEach(section => {
+      const top = section.offsetTop - 120;
 
-}
+      if (scrollPos >= top) {
+        current = section.getAttribute("id");
+      }
+    });
 
-window.addEventListener("scroll",()=>{
+    if (current) setActive(current);
+  }
 
-let current="";
+  // listen to correct scroll container
+  (main || window).addEventListener("scroll", handleScroll);
 
-sections.forEach(section=>{
+  // ======================
+  // URL SYNC (/services/websites)
+  // ======================
+  function syncFromURL() {
+    const parts = location.pathname.replace(/^\/+/, "").split("/");
+    const section = parts[1]; // services/websites → websites
 
-const top=section.offsetTop-120;
+    if (section) {
+      setActive(section);
+    }
+  }
 
-if(scrollY>=top){
-current=section.getAttribute("id");
-}
+  // initial sync
+  syncFromURL();
 
-});
-
-if(current)setActive(current);
-
-});
+  // sync on back/forward navigation
+  window.addEventListener("popstate", syncFromURL);
 
 });

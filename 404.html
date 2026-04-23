@@ -10,15 +10,13 @@
   <title>Loading...</title>
   <script>
     (function () {
-      var fullPath = window.location.pathname + window.location.search + window.location.hash;
-      window.location.replace(window.location.origin + '/?r=' + encodeURIComponent(fullPath));
+      var path = window.location.pathname + window.location.search + window.location.hash;
+      var encoded = encodeURIComponent(path);
+
+      window.location.replace('/?r=' + encoded);
     })();
   </script>
 </head>
 <body>
-  <div class="loading">
-    <div class="spinner"></div>
-    <p>Loading...</p>
-  </div>
 </body>
 </html>
