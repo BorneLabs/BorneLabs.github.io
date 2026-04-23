@@ -7,13 +7,14 @@
   async function loadPage(page) {
     if (!content) return;
 
-    const file = `/Pages/${page.toLowerCase()}.html`;
+    const pageName = page.toLowerCase();
+    const file = new URL(`/Pages/${pageName}.html`, location.origin).href;
 
     try {
       const res = await fetch(`${file}?v=${Date.now()}`, { cache: 'no-store' });
 
       if (!res.ok) {
-        if (page.toLowerCase() !== 'home') return loadPage('Home');
+        if (pageName !== 'home') return loadPage('Home');
         throw new Error(res.status);
       }
 
@@ -35,7 +36,7 @@
         document.head.appendChild(link);
       }
 
-      link.href = `${location.origin}/${page.toLowerCase()}`;
+      link.href = new URL(`/${pageName}`, location.origin).href;
     } catch (err) {
       content.innerHTML = `<div class="p-3 text-danger">Could not load "${file}" - ${err.message}</div>`;
     }
@@ -47,16 +48,14 @@
     const section = document.getElementById(id);
     if (!section) return;
 
-    const offset = 70;
-    main.scrollTo({ top: section.offsetTop - offset, behavior: 'smooth' });
+    main.scrollTo({ top: section.offsetTop - 70, behavior: 'smooth' });
   }
 
   function updateActiveNav(page) {
-    document.querySelectorAll('[data-page]').forEach(el => {
-      const pageAttr = el.dataset.page.toLowerCase();
-      const currentPage = page.toLowerCase();
+    const currentPage = page.toLowerCase();
 
-      if (pageAttr === currentPage) {
+    document.querySelectorAll('[data-page]').forEach(el => {
+      if (el.dataset.page.toLowerCase() === currentPage) {
         el.classList.add('active');
       } else {
         el.classList.remove('active');
@@ -80,17 +79,17 @@
       path = 'Home';
     }
 
-    let sectionId;
+    let sectionId = '';
 
     if (path.includes('/')) {
       const parts = path.split('/');
       path = parts[0];
-      sectionId = parts[1];
+      sectionId = parts[1] || '';
     }
 
     if (!/^[a-zA-Z0-9\-]+$/.test(path)) {
       path = 'Home';
-      sectionId = undefined;
+      sectionId = '';
     }
 
     loadPage(path).then(() => {
@@ -157,12 +156,12 @@
       let path = redirectPath.replace(/^\/+/, '').replace(/\/$/, '');
       if (!path || path === 'index.html') path = 'Home';
 
-      let sectionId;
+      let sectionId = '';
 
       if (path.includes('/')) {
         const parts = path.split('/');
         path = parts[0];
-        sectionId = parts[1];
+        sectionId = parts[1] || '';
       }
 
       initNavigation();
