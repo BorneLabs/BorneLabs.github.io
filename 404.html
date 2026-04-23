@@ -10,14 +10,9 @@
   <meta http-equiv="expires" content="0">
   <title>Loading...</title>
   <script>
-    // Preserve the requested path and redirect to home
     (function () {
-      var path = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
-      
-      // Always redirect to home, preserving the original path
-      var redirectUrl = '/?r=' + encodeURIComponent(path) + search + hash;
+      var fullPath = window.location.pathname + window.location.search + window.location.hash;
+      var redirectUrl = '/?r=' + encodeURIComponent(fullPath);
       window.location.replace(redirectUrl);
     })();
   </script>
