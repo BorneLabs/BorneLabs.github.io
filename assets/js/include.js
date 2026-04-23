@@ -4,22 +4,35 @@
   const content = document.getElementById('content');
   const main = document.querySelector('.main');
 
-  function cleanPath(value) {
-    return value.split('?')[0].split('#')[0].replace(/^\/+/, '').replace(/\/$/, '');
+  function setCanonical(pageName) {
+    let link = document.querySelector("link[rel='canonical']");
+
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      document.head.appendChild(link);
+    }
+
+    link.href =
+      pageName === 'home'
+        ? `${location.origin}/`
+        : new URL(`/${pageName}`, location.origin).href;
   }
 
   async function loadPage(page) {
-    if (!content) return;
+    if (!content) return 'home';
 
-    const pageName = page.toLowerCase();
+    const pageName = (page || 'home').toLowerCase();
     const file = new URL(`/Pages/${pageName}.html`, location.origin).href;
 
     try {
-      const res = await fetch(`${file}?v=${Date.now()}`, { cache: 'no-store' });
+      const res = await fetch(`${file}?v=${Date.now()}`, {
+        cache: 'no-store'
+      });
 
       if (!res.ok) {
-        if (pageName !== 'home') return loadPage('Home');
-        throw new Error(res.status);
+        if (pageName !== 'home') return loadPage('home');
+        throw new Error(`HTTP ${res.status}`);
       }
 
       const html = await res.text();
@@ -33,16 +46,17 @@
         main.scrollTo({ top: 0, behavior: 'auto' });
       }
 
-      let link = document.querySelector("link[rel='canonical']");
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'canonical';
-        document.head.appendChild(link);
-      }
-
-      link.href = new URL(`/${pageName}`, location.origin).href;
+      setCanonical(pageName);
+      return pageName;
     } catch (err) {
-      content.innerHTML = `<div class="p-3 text-danger">Could not load "${file}" - ${err.message}</div>`;
+      if (pageName !== 'home') return loadPage('home');
+
+      content.innerHTML = `
+        <div class="p-3 text-danger">
+          Could not load "${file}" - ${err.message}
+        </div>
+      `;
+      return 'home';
     }
   }
 
@@ -52,57 +66,62 @@
     const section = document.getElementById(id);
     if (!section) return;
 
-    main.scrollTo({ top: section.offsetTop - 70, behavior: 'smooth' });
+    main.scrollTo({
+      top: section.offsetTop - 70,
+      behavior: 'smooth'
+    });
   }
 
   function updateActiveNav(page) {
-    const currentPage = page.toLowerCase();
+    const currentPage = (page || 'home').toLowerCase();
 
     document.querySelectorAll('[data-page]').forEach(el => {
-      if (el.dataset.page.toLowerCase() === currentPage) {
-        el.classList.add('active');
-      } else {
-        el.classList.remove('active');
-      }
+      el.classList.toggle(
+        'active',
+        (el.dataset.page || '').toLowerCase() === currentPage
+      );
     });
   }
 
-  function navigateTo(page, section) {
-    const path = section
-      ? `/${page.toLowerCase()}/${section.toLowerCase()}`
-      : `/${page.toLowerCase()}`;
+  function navigateTo(page, section = '') {
+    const pageName = (page || 'home').toLowerCase();
+    const sectionName = (section || '').toLowerCase();
 
-    history.pushState({ page, section }, '', path);
+    const path = sectionName
+      ? `/${pageName}/${sectionName}`
+      : `/${pageName}`;
+
+    history.pushState({ page: pageName, section: sectionName }, '', path);
     router();
   }
 
-  function router() {
-    let path = cleanPath(location.pathname);
+  function parseRoute() {
+    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
 
     if (!path || path === 'index.html') {
-      path = 'Home';
+      return { page: 'home', sectionId: '' };
     }
 
-    let sectionId = '';
+    const parts = path.split('/');
+    const page = parts[0] || 'home';
+    const sectionId = parts[1] || '';
 
-    if (path.includes('/')) {
-      const parts = path.split('/');
-      path = parts[0];
-      sectionId = parts[1] || '';
+    if (!/^[a-zA-Z0-9\-]+$/.test(page)) {
+      return { page: 'home', sectionId: '' };
     }
 
-    if (!/^[a-zA-Z0-9\-]+$/.test(path)) {
-      path = 'Home';
-      sectionId = '';
+    return { page, sectionId };
+  }
+
+  async function router() {
+    const { page, sectionId } = parseRoute();
+    const loadedPage = await loadPage(page);
+
+    if (sectionId) {
+      requestAnimationFrame(() => scrollToSection(sectionId));
     }
 
-    loadPage(path).then(() => {
-      if (sectionId) {
-        scrollToSection(sectionId);
-      }
-
-      updateActiveNav(path);
-    });
+    updateActiveNav(loadedPage);
   }
 
   function initNavigation() {
@@ -113,7 +132,7 @@
         e.preventDefault();
 
         const page = pageLink.dataset.page;
-        const section = pageLink.dataset.section;
+        const section = pageLink.dataset.section || '';
 
         navigateTo(page, section);
 
@@ -133,12 +152,20 @@
 
         if (section) {
           e.preventDefault();
+
           scrollToSection(id);
 
           const currentPage = location.pathname.split('/')[1] || 'home';
-          history.replaceState({ page: currentPage, section: id }, '', `/${currentPage}/${id}`);
+          history.replaceState(
+            { page: currentPage, section: id },
+            '',
+            `/${currentPage}/${id}`
+          );
 
-          document.querySelectorAll('.tag-link').forEach(el => el.classList.remove('active'));
+          document.querySelectorAll('.tag-link').forEach(el => {
+            el.classList.remove('active');
+          });
+
           tagLink.classList.add('active');
         }
       }
@@ -151,35 +178,10 @@
 
     if (redirectPath) {
       params.delete('r');
-
       const newSearch = params.toString();
       const newUrl = redirectPath + (newSearch ? `?${newSearch}` : '');
 
       history.replaceState(null, '', newUrl);
-
-      let path = cleanPath(redirectPath);
-      if (!path || path === 'index.html') path = 'Home';
-
-      let sectionId = '';
-
-      if (path.includes('/')) {
-        const parts = path.split('/');
-        path = parts[0];
-        sectionId = parts[1] || '';
-      }
-
-      initNavigation();
-
-      loadPage(path).then(() => {
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-
-        updateActiveNav(path);
-      });
-
-      window.addEventListener('popstate', router);
-      return;
     }
 
     initNavigation();

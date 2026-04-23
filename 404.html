@@ -11,8 +11,7 @@
   <script>
     (function () {
       var fullPath = window.location.pathname + window.location.search + window.location.hash;
-      var redirectUrl = '/?r=' + encodeURIComponent(fullPath);
-      window.location.replace(redirectUrl);
+      window.location.replace(window.location.origin + '/?r=' + encodeURIComponent(fullPath));
     })();
   </script>
 </head>
