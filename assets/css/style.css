@@ -189,3 +189,375 @@ color:white;
         border-left: none;
     }
 }
+
+/* ===== UNIFIED DESIGN SYSTEM ===== */
+
+/* Page Header - Consistent across all pages */
+.page-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f1f1f;
+}
+
+.page-header .social-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.page-header .social-links a {
+    color: #1f1f1f;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.page-header .social-links a:hover {
+    color: #555;
+}
+
+/* Section styling - consistent spacing and structure */
+.page-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.page-section.bg-light-section {
+    background-color: #f8f9fa;
+}
+
+/* Section header - h3 with icon and consistent styling */
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-title.text-start {
+    text-align: left;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px solid #dee2e6;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+/* Card styles - unified appearance */
+.card-uniform {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-uniform:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-uniform .card-header {
+    background-color: #1f1f1f;
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-uniform .card-header h4,
+.card-uniform .card-header h5,
+.card-uniform .card-header h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.card-uniform .card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-uniform .card-body p {
+    margin-bottom: 0.75rem;
+}
+
+.card-uniform .card-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Button styles - unified primary button */
+.btn-primary-custom {
+    background-color: #1f1f1f;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-primary-custom.btn-block {
+    width: 100%;
+    display: flex;
+}
+
+/* Small card/link styling */
+.small-card-link {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size: 0.875rem;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.small-card-link:hover {
+    background-color: #e9ecef;
+    text-decoration: none;
+    color: #1f1f1f;
+}
+
+/* Typography - consistent heading and text styles */
+.text-body-lg {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1f1f1f;
+}
+
+.text-body-md {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #1f1f1f;
+}
+
+.text-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #666;
+}
+
+.text-muted-custom {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Container pattern - unified for all pages */
+.page-container {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 576px) {
+    .page-container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .page-container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .page-container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .page-container {
+        max-width: 1140px;
+    }
+}
+
+/* Grid/Gap standardization */
+.grid-gap-lg {
+    gap: 2rem;
+}
+
+.grid-gap-md {
+    gap: 1.5rem;
+}
+
+.grid-gap-sm {
+    gap: 1rem;
+}
+
+/* Profile/Team cards - unified style */
+.profile-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.profile-card-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.profile-card-role {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Hero section - unified styling */
+.hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+    min-height: 400px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 2rem;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Service/Feature lists */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.service-item {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: #1f1f1f;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.service-item:hover {
+    background-color: #e9ecef;
+    text-decoration: none;
+    color: #1f1f1f;
+}
+
+.service-item i {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Consistent responsive spacing */
+@media (max-width: 768px) {
+    .page-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}

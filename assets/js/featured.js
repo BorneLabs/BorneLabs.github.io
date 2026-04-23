@@ -31,12 +31,12 @@ async function loadFeaturedProjects() {
     cardCol.className = "col-12 col-md-6 col-lg-4 mb-4"; // Bootstrap grid
 
     cardCol.innerHTML = `
-      <div class="card h-100 project-card shadow-sm" style="cursor:pointer; overflow:hidden;"
+      <div class="card-uniform project-card" style="cursor:pointer; overflow:hidden;"
            data-bs-toggle="modal" data-bs-target="#projectModal"
            data-name="${name}" data-description="${description}" data-image="${imageURL}" data-logo="${logoURL}" data-wing="${wing}">
 
-        <div class="d-flex align-items-center justify-content-center gap-2 bg-white text-dark px-2 py-1 border-bottom"
-             style="font-weight:600; font-size:0.875rem;">
+        <div class="card-header d-flex align-items-center justify-content-center gap-2 py-2"
+             style="font-weight:600; font-size:0.875rem; cursor: pointer;">
           <img src="assets/media/wings/${wing}.jpg" alt="${wing} logo" style="width:20px; height:20px; object-fit:contain;">
           <span>${wing}</span>
         </div>
@@ -51,7 +51,7 @@ async function loadFeaturedProjects() {
             <span class="text-truncate d-block w-100">${name}</span>
           </h5>
 
-          <p class="mb-0 project-card-desc">${description}</p>
+          <p class="mb-0 project-card-desc text-body-md">${description}</p>
         </div>
       </div>
     `;
@@ -81,8 +81,8 @@ async function loadFeaturedProjects() {
                   </h3>
                   <img src="${image}" class="img-fluid rounded mb-3" alt="${name}">
                 </div>
-                <hr>
-                <div class="text-start"><p>${description}</p></div>
+                <hr class="section-divider">
+                <div class="text-start"><p class="text-body-lg">${description}</p></div>
               </div>
             </div>
 
@@ -99,9 +99,9 @@ async function loadFeaturedProjects() {
                     ${logo ? `<img class="me-2 rounded" src="${logo}" alt="${name} logo" style="height:40px;">` : ''}${name}
                   </h3>
                 </div>
-                <hr class="flex-shrink-0">
+                <hr class="section-divider flex-shrink-0">
                 <div class="text-dark overflow-auto flex-grow-1 pe-2">
-                  <p>${description}</p>
+                  <p class="text-body-lg">${description}</p>
                 </div>
               </div>
             </div>
