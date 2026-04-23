@@ -4,6 +4,10 @@
   const content = document.getElementById('content');
   const main = document.querySelector('.main');
 
+  function cleanPath(value) {
+    return value.split('?')[0].split('#')[0].replace(/^\/+/, '').replace(/\/$/, '');
+  }
+
   async function loadPage(page) {
     if (!content) return;
 
@@ -73,7 +77,7 @@
   }
 
   function router() {
-    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
+    let path = cleanPath(location.pathname);
 
     if (!path || path === 'index.html') {
       path = 'Home';
@@ -153,7 +157,7 @@
 
       history.replaceState(null, '', newUrl);
 
-      let path = redirectPath.replace(/^\/+/, '').replace(/\/$/, '');
+      let path = cleanPath(redirectPath);
       if (!path || path === 'index.html') path = 'Home';
 
       let sectionId = '';
