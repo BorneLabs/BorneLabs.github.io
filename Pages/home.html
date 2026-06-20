@@ -13,71 +13,55 @@
   <div class="hero-content">
     <h1>We Do Projects</h1>
     <p>If you're interested in joining our team, we'd love to hear from you.</p>
-    <p class="small text-white-50">Email us at bornelabs.org@gmail.com</p>
+    <p class="small text-white-50">Email us at contact@bornelabs.org</p>
   </div>
 </div>
 
 <section class="page-section" id="Home-Services">
-  <div class="page-container">
-    <div class="row g-4">
+  <div class="services-marquee">
+    <div class="services-track">
 
-      <div class="col-12 col-md-6">
-        <div class="card-uniform">
-          <div class="card-header">
-            <h5 class="fw-bold mb-0">
-              <i class="bi bi-rocket-takeoff me-2"></i>Projects We Do
-            </h5>
-          </div>
-
-          <div class="card-body">
-            <div class="service-list">
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-laptop"></i>
-                <span>Static & Fullstack Websites</span>
-              </a>
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-phone"></i>
-                <span>Native Mobile Apps & PWAs</span>
-              </a>
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-robot"></i>
-                <span>AI Inference & Integration</span>
-              </a>
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-github"></i>
-                <span>Collaborative Open Source</span>
-              </a>
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-people"></i>
-                <span>Project Management & Partnerships</span>
-              </a>
-            </div>
-          </div>
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-laptop fs-1 mb-2"></i>
+          <div class="small fw-semibold">Static &amp; Fullstack Websites</div>
         </div>
-      </div>
+      </a>
 
-      <div class="col-12 col-md-6">
-        <div class="card-uniform">
-          <div class="card-header">
-            <h5 class="fw-bold mb-0">
-              <i class="bi bi-gear me-2"></i>Other Services
-            </h5>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div class="service-list mb-3">
-              <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-                <i class="bi bi-palette"></i>
-                <span>Graphic Design</span>
-              </a>
-            </div>
-            <div class="mt-auto">
-              <a data-page="services" class="btn-primary-custom btn-block" role="button" style="cursor: pointer;">
-                <i class="bi bi-rocket"></i>Hire Our Services
-              </a>
-            </div>
-          </div>
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-phone fs-1 mb-2"></i>
+          <div class="small fw-semibold">Native Mobile Apps &amp; PWAs</div>
         </div>
-      </div>
+      </a>
+
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-robot fs-1 mb-2"></i>
+          <div class="small fw-semibold">AI Inference &amp; Integration</div>
+        </div>
+      </a>
+
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-github fs-1 mb-2"></i>
+          <div class="small fw-semibold">Collaborative Open Source</div>
+        </div>
+      </a>
+
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-people fs-1 mb-2"></i>
+          <div class="small fw-semibold">Project Management &amp; Partnerships</div>
+        </div>
+      </a>
+
+      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <div class="card service-card d-flex justify-content-center align-items-center text-center">
+          <i class="bi bi-palette fs-1 mb-2"></i>
+          <div class="small fw-semibold">Graphic Design</div>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -85,9 +69,9 @@
 
 <section class="page-section" id="Home-Featured-Projects">
   <div class="page-container">
-    <h2 class="section-title">Featured Projects</h2>
+    <h1 class="section-title">Featured Projects</h1>
     <hr class="section-divider">
-    <div id="featured-projects" class="row g-4 justify-content-center"></div>
+    <div class="row g-4 justify-content-left" id="featured-projects"></div>
   </div>
 
   <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
@@ -107,7 +91,7 @@
     <h2 class="section-title">Education Resources</h2>
     <hr class="section-divider">
 
-    <div class="row g-4 justify-content-center" id="video-cards"></div>
+    <div class="row g-4 justify-content-left" id="video-cards"></div>
   </div>
 
   <!-- Modal -->
@@ -136,7 +120,7 @@
     <div class="row g-3">
 
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-uniform">
+        <div class="card">
           <div class="card-header">
             <h5 class="fw-bold mb-0">
               <i class="bi bi-people-fill me-2"></i>Community Collaboration
@@ -154,7 +138,7 @@
       </div>
 
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-uniform">
+        <div class="card">
           <div class="card-header">
             <h5 class="fw-bold mb-0">
               <i class="bi bi-currency-dollar me-2"></i>Revenue Partnership
@@ -172,7 +156,7 @@
       </div>
 
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-uniform">
+        <div class="card">
           <div class="card-header">
             <h5 class="fw-bold mb-0">
               <i class="bi bi-lightning-fill me-2"></i>Express Build

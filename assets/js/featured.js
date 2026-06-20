@@ -1,72 +1,97 @@
 const dbURL = "https://bms-database-d8fba-default-rtdb.firebaseio.com";
 
+function cleanText(value) {
+  return value ? value.replace(/^"+|"+$/g, "") : "";
+}
+
+function summarizeText(text, wordLimit = 10) {
+  const words = text.trim().split(/\s+/);
+  return words.length > wordLimit
+    ? words.slice(0, wordLimit).join(" ") + "..."
+    : text;
+}
+
 async function loadFeaturedProjects() {
   const container = document.getElementById("featured-projects");
-  if (!container) return;
+  const modalContent = document.getElementById("modalContent");
+
+  if (!container || !modalContent) return;
 
   container.innerHTML = "";
 
-  // Fetch featured projects keys
-  const featuredRes = await fetch(`${dbURL}/system/featured_projects.json`);
-  const featured = await featuredRes.json();
-  if (!featured) return;
+  try {
+    const featuredRes = await fetch(`${dbURL}/system/featured_projects.json`);
+    const featured = await featuredRes.json();
 
-  const keys = Object.keys(featured);
-  if (keys.length === 0) return;
+    if (!featured) return;
 
-  for (const key of keys) {
-    // Fetch project details
-    const projectRes = await fetch(`${dbURL}/BMS/PROJECTS/${key}.json`);
-    const project = await projectRes.json();
-    if (!project) continue;
+    const keys = Object.keys(featured);
+    if (keys.length === 0) return;
 
-    const imageURL = project.image ? project.image.replace(/^"+|"+$/g, '') : '';
-    const logoURL = project.logo ? project.logo.replace(/^"+|"+$/g, '') : '';
-    const name = project.name ? project.name.replace(/^"+|"+$/g, '') : '';
-    const description = project.description ? project.description.replace(/^"+|"+$/g, '') : '';
-    const wing = project.wing ? project.wing.replace(/^"+|"+$/g, '') : '';
+    for (const key of keys) {
+      const projectRes = await fetch(`${dbURL}/BMS/PROJECTS/${key}.json`);
+      const project = await projectRes.json();
+      if (!project) continue;
 
-    // Create card column
-    const cardCol = document.createElement("div");
-    cardCol.className = "col-12 col-md-6 col-lg-4 mb-4"; // Bootstrap grid
+      const imageURL = cleanText(project.image);
+      const logoURL = cleanText(project.logo);
+      const name = cleanText(project.name);
+      const description = cleanText(project.description);
+      const wing = cleanText(project.wing);
 
-    cardCol.innerHTML = `
-      <div class="card-uniform project-card" style="cursor:pointer; overflow:hidden;"
-           data-bs-toggle="modal" data-bs-target="#projectModal"
-           data-name="${name}" data-description="${description}" data-image="${imageURL}" data-logo="${logoURL}" data-wing="${wing}">
+      const cardCol = document.createElement("div");
+      cardCol.className = "col-12 col-md-6 col-lg-4 d-flex mb-4";
 
-        <div class="card-header d-flex align-items-center justify-content-center gap-2 py-2"
-             style="font-weight:600; font-size:0.875rem; cursor: pointer;">
-          <img src="assets/media/wings/${wing}.jpg" alt="${wing} logo" style="width:20px; height:20px; object-fit:contain;">
-          <span>${wing}</span>
+      cardCol.innerHTML = `
+        <div class="card w-100 h-100 featured-card"
+             style="cursor:pointer; overflow:hidden;"
+             data-bs-toggle="modal"
+             data-bs-target="#projectModal"
+             data-name="${name}"
+             data-description="${description}"
+             data-image="${imageURL}"
+             data-logo="${logoURL}"
+             data-wing="${wing}">
+
+          <div class="card-header d-flex align-items-center justify-content-center gap-2 py-2"
+               style="font-weight:800; font-size:1.5rem; cursor:pointer;">
+            <img src="assets/media/wings/${wing}.jpg"
+                 alt="${wing} logo"
+                 style="width:35px; height:35px; object-fit:contain;">
+            <span>${wing}</span>
+          </div>
+
+          <div class="w-100" style="aspect-ratio:4/3; overflow:hidden;">
+            <img src="${imageURL}"
+                 class="w-100 h-100"
+                 alt="${name}"
+                 style="object-fit:cover; display:block;">
+          </div>
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="fw-semibold mb-2 d-flex align-items-center overflow-hidden">
+              ${logoURL ? `<img class="project-logo me-2" src="${logoURL}" alt="${name} logo" style="width:50px; height:50px; object-fit:contain; flex-shrink:0;">` : ""}
+              <span class="text-truncate d-block w-100" style="font-size: 1.25rem; font-weight:700;">${name}</span>
+            </h5>
+
+            <p class="mb-0 project-card-desc text-body-md">
+              ${summarizeText(description, 10)}
+            </p>
+          </div>
         </div>
+      `;
 
-        <div class="w-100" style="aspect-ratio:1/1; overflow:hidden; background:#f8f9fa;">
-          <img src="${imageURL}" class="project-image w-100 h-100" alt="${name}" style="object-fit:cover; display:block;">
-        </div>
+      container.appendChild(cardCol);
+    }
 
-        <div class="card-body d-flex flex-column">
-          <h5 class="fw-semibold mb-2 d-flex align-items-center overflow-hidden">
-            ${logoURL ? `<img class="project-logo me-2" src="${logoURL}" style="width:24px; height:24px; object-fit:contain; flex-shrink:0;">` : ''}
-            <span class="text-truncate d-block w-100">${name}</span>
-          </h5>
+    container.addEventListener("click", (e) => {
+      const card = e.target.closest(".featured-card");
+      if (!card) return;
 
-          <p class="mb-0 project-card-desc text-body-md">${description}</p>
-        </div>
-      </div>
-    `;
-
-    container.appendChild(cardCol);
-  }
-
-  // Modal click handler — now after cards exist
-  const modalContent = document.getElementById("modalContent");
-  document.querySelectorAll(".project-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const name = card.getAttribute("data-name");
-      const description = card.getAttribute("data-description");
-      const image = card.getAttribute("data-image");
-      const logo = card.getAttribute("data-logo");
+      const name = card.getAttribute("data-name") || "";
+      const description = card.getAttribute("data-description") || "";
+      const image = card.getAttribute("data-image") || "";
+      const logo = card.getAttribute("data-logo") || "";
 
       modalContent.innerHTML = `
         <div class="container-fluid">
@@ -110,7 +135,9 @@ async function loadFeaturedProjects() {
         </div>
       `;
     });
-  });
+  } catch (error) {
+    console.error("Error loading featured projects:", error);
+  }
 }
 
 loadFeaturedProjects();
