@@ -51,6 +51,7 @@ color:white;
     flex:0 0 200px;
     height: 100%;
     padding: 0.5rem 1rem;
+    border-right: 1px solid #c7c7c7;
 
 }
 .mobileMenu{
@@ -60,7 +61,6 @@ color:white;
 
 .NavLinks {
     background: white ;
-    border-right: 1px solid #c7c7c7;
 }
 
 
