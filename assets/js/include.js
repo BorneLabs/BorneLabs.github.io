@@ -1,28 +1,36 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  const content = document.getElementById('content');
-  const main = document.querySelector('.main');
-
-  function getCurrentPageFromPath() {
-    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
-    if (!path || path === 'index.html') return 'home';
-    return path.split('/')[0].toLowerCase();
-  }
+  const content = document.getElementById("content");
+  const scrollRoot = document.querySelector(".main");
+  const mobileToggle = document.getElementById("mobileMenuToggle");
+  const mobileDrawer = document.getElementById("mobileDrawer");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+  const mobileDrawerClose = document.getElementById("mobileDrawerClose");
+  const validPages = new Set([
+    "home",
+    "projects",
+    "services",
+    "about",
+    "contacts",
+    "papers",
+    "more",
+    "policy"
+  ]);
 
   function getRouteFromPath() {
-    let path = location.pathname.replace(/^\/+/, '').replace(/\/$/, '');
+    let path = location.pathname.replace(/^\/+/, "").replace(/\/$/, "");
 
-    if (!path || path === 'index.html') {
-      return { page: 'home', sectionId: '' };
+    if (!path || path === "index.html") {
+      return { page: "home", sectionId: "" };
     }
 
-    const parts = path.split('/');
-    const page = (parts[0] || 'home').toLowerCase();
-    const sectionId = (parts[1] || '').toLowerCase();
+    const [rawPage, rawSection] = path.split("/");
+    const page = (rawPage || "home").toLowerCase();
+    const sectionId = (rawSection || "").toLowerCase();
 
-    if (!/^[a-zA-Z0-9\-]+$/.test(page)) {
-      return { page: 'home', sectionId: '' };
+    if (!validPages.has(page)) {
+      return { page: "home", sectionId: "" };
     }
 
     return { page, sectionId };
@@ -32,167 +40,184 @@
     let link = document.querySelector("link[rel='canonical']");
 
     if (!link) {
-      link = document.createElement('link');
-      link.rel = 'canonical';
+      link = document.createElement("link");
+      link.rel = "canonical";
       document.head.appendChild(link);
     }
 
     link.href =
-      pageName === 'home'
+      pageName === "home"
         ? `${location.origin}/`
         : new URL(`/${pageName}`, location.origin).href;
   }
 
   async function loadPage(page) {
-    if (!content) return 'home';
+    if (!content) {
+      return "home";
+    }
 
-    const pageName = (page || 'home').toLowerCase();
+    const pageName = validPages.has(page) ? page : "home";
     const file = new URL(`/Pages/${pageName}.html`, location.origin).href;
 
     try {
-      const res = await fetch(`${file}?v=${Date.now()}`, {
-        cache: 'no-store'
-      });
-
+      const res = await fetch(`${file}?v=${Date.now()}`, { cache: "no-store" });
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
       }
 
-      const html = await res.text();
-      content.innerHTML = html;
+      content.innerHTML = await res.text();
 
-      if (typeof loadFeaturedProjects === 'function') {
+      if (typeof loadFeaturedProjects === "function") {
         loadFeaturedProjects();
       }
 
-      if (main) {
-        main.scrollTo({ top: 0, behavior: 'auto' });
+      if (typeof fetchPlaylistVideos === "function") {
+        fetchPlaylistVideos();
+      }
+
+      if (typeof initServiceTags === "function") {
+        initServiceTags();
+      }
+
+      if (scrollRoot) {
+        scrollRoot.scrollTo({ top: 0, behavior: "auto" });
       }
 
       setCanonical(pageName);
       return pageName;
     } catch (err) {
-      content.innerHTML = `
-        <div class="p-3 text-danger">
-          Could not load "${file}" - ${err.message}
-        </div>
-      `;
-      return pageName;
+      content.innerHTML = `<div class="loading-state">Could not load content. ${err.message}</div>`;
+      return "home";
     }
   }
 
-  function scrollToSection(id) {
-    if (!main) return;
+  function scrollToSection(sectionId) {
+    if (!sectionId || !scrollRoot) {
+      return;
+    }
 
-    const section = document.getElementById(id);
-    if (!section) return;
+    const section = document.getElementById(sectionId);
+    if (!section) {
+      return;
+    }
 
-    main.scrollTo({
-      top: section.offsetTop - 70,
-      behavior: 'smooth'
+    const top = section.offsetTop - 24;
+    scrollRoot.scrollTo({ top, behavior: "smooth" });
+  }
+
+  function updateActiveNav(pageName) {
+    const current = (pageName || "home").toLowerCase();
+
+    document.body.setAttribute("data-current-page", current);
+
+    document.querySelectorAll("[data-page]").forEach((node) => {
+      const page = (node.dataset.page || "").toLowerCase();
+      node.classList.toggle("active", page === current);
     });
   }
 
-  function updateActiveNav(page) {
-    const currentPage = (page || 'home').toLowerCase();
+  function navigateTo(page, section) {
+    const pageName = validPages.has((page || "").toLowerCase())
+      ? page.toLowerCase()
+      : "home";
+    const sectionName = (section || "").toLowerCase();
+    const path = sectionName ? `/${pageName}/${sectionName}` : `/${pageName}`;
 
-    document.querySelectorAll('[data-page]').forEach(el => {
-      el.classList.toggle(
-        'active',
-        (el.dataset.page || '').toLowerCase() === currentPage
-      );
-    });
-  }
-
-  function navigateTo(page, section = '') {
-    const pageName = (page || 'home').toLowerCase();
-    const sectionName = (section || '').toLowerCase();
-
-    const path = sectionName
-      ? `/${pageName}/${sectionName}`
-      : `/${pageName}`;
-
-    history.pushState({ page: pageName, section: sectionName }, '', path);
+    history.pushState({ page: pageName, section: sectionName }, "", path);
     router();
+  }
+
+  function setMobileDrawerOpen(isOpen) {
+    if (!mobileDrawer || !mobileOverlay || !mobileToggle) {
+      return;
+    }
+
+    mobileDrawer.classList.toggle("open", isOpen);
+    mobileOverlay.hidden = !isOpen;
+    mobileOverlay.classList.toggle("show", isOpen);
+    mobileToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("mobile-drawer-open", isOpen);
   }
 
   async function router() {
     const { page, sectionId } = getRouteFromPath();
     const loadedPage = await loadPage(page);
 
-    if (sectionId && loadedPage === 'services') {
+    updateActiveNav(loadedPage);
+
+    if (sectionId && loadedPage === "services") {
       requestAnimationFrame(() => scrollToSection(sectionId));
     }
-
-    updateActiveNav(loadedPage);
   }
 
   function initNavigation() {
-    document.addEventListener('click', e => {
-      const pageLink = e.target.closest('[data-page]');
+    document.addEventListener("click", (event) => {
+      const pageLink = event.target.closest("[data-page]");
       if (pageLink) {
-        e.preventDefault();
+        event.preventDefault();
+        navigateTo(pageLink.dataset.page || "home", pageLink.dataset.section || "");
 
-        const page = pageLink.dataset.page;
-        const section = pageLink.dataset.section || '';
-
-        navigateTo(page, section);
-
-        const menu = document.getElementById('mobileMenu');
-        if (menu?.classList.contains('show')) {
-          bootstrap.Collapse.getInstance(menu)?.hide();
-        }
+        setMobileDrawerOpen(false);
 
         return;
       }
 
-      const tagLink = e.target.closest('a[href^="#"]');
-      if (tagLink) {
-        const id = tagLink.getAttribute('href').replace('#', '');
-        if (!id) return;
+      const sectionLink = event.target.closest("a[href^='#']");
+      if (!sectionLink || event.defaultPrevented) {
+        return;
+      }
 
-        e.preventDefault();
+      const section = (sectionLink.getAttribute("href") || "").replace("#", "").trim();
+      if (!section) {
+        return;
+      }
 
-        const currentPage = getCurrentPageFromPath();
+      event.preventDefault();
 
-        if (currentPage !== 'services') {
-          history.pushState(
-            { page: 'services', section: id },
-            '',
-            `/services/${id}`
-          );
-          router();
-        } else {
-          history.replaceState(
-            { page: 'services', section: id },
-            '',
-            `/services/${id}`
-          );
-          scrollToSection(id);
-        }
-
-        document.querySelectorAll('.tag-link').forEach(el => {
-          el.classList.remove('active');
-        });
-
-        tagLink.classList.add('active');
+      const { page } = getRouteFromPath();
+      if (page !== "services") {
+        history.pushState({ page: "services", section }, "", `/services/${section}`);
+        router();
+      } else {
+        history.replaceState({ page: "services", section }, "", `/services/${section}`);
+        scrollToSection(section);
       }
     });
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const redirectPath = params.get('r');
+  function initMobileDrawer() {
+    if (!mobileToggle || !mobileDrawer || !mobileOverlay || !mobileDrawerClose) {
+      return;
+    }
+
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = mobileDrawer.classList.contains("open");
+      setMobileDrawerOpen(!isOpen);
+    });
+
+    mobileDrawerClose.addEventListener("click", () => setMobileDrawerOpen(false));
+    mobileOverlay.addEventListener("click", () => setMobileDrawerOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMobileDrawerOpen(false);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(location.search);
+    const redirectPath = params.get("r");
 
     if (redirectPath) {
-      params.delete('r');
-      const newSearch = params.toString();
-      const newUrl = redirectPath + (newSearch ? `?${newSearch}` : '');
-      history.replaceState(null, '', newUrl);
+      params.delete("r");
+      const rest = params.toString();
+      history.replaceState(null, "", redirectPath + (rest ? `?${rest}` : ""));
     }
 
     initNavigation();
+    initMobileDrawer();
     router();
-    window.addEventListener('popstate', router);
+    window.addEventListener("popstate", router);
   });
 })();

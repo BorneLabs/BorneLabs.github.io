@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#1f1f1f">
+    <meta name="theme-color" content="#17191c">
     <meta name="description" content="BorneLabs - Custom web development, mobile apps, AI integration, and open-source software solutions. Empower your innovation with professional technology services.">
     <meta name="keywords" content="web development, mobile apps, AI integration, open source, project management, graphic design, software solutions, custom development">
     <meta name="author" content="BorneLabs">
@@ -31,8 +31,14 @@
     <link rel="apple-touch-icon" href="assets/media/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="preload" href="assets/css/style.css" as="style">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="preload" href="assets/css/root.css" as="style">
+    <link rel="preload" href="assets/css/layout.css" as="style">
+    <link rel="preload" href="assets/css/components.css" as="style">
+    <link rel="preload" href="assets/css/responsive.css" as="style">
+    <link href="assets/css/root.css" rel="stylesheet">
+    <link href="assets/css/layout.css" rel="stylesheet">
+    <link href="assets/css/components.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
     <title>BorneLabs</title>
     <script type="application/ld+json">
     {
@@ -60,128 +66,97 @@
       "serviceArea": {
         "@type": "Country",
         "name": "Worldwide"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Software Development Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "name": "Web Development",
-            "description": "Custom web applications and responsive websites"
-          },
-          {
-            "@type": "Offer",
-            "name": "Mobile App Development",
-            "description": "Native and cross-platform mobile applications"
-          },
-          {
-            "@type": "Offer",
-            "name": "AI Integration",
-            "description": "AI and machine learning integration services"
-          },
-          {
-            "@type": "Offer",
-            "name": "Graphic Design",
-            "description": "Professional branding and design services"
-          }
-        ]
       }
     }
     </script>
 </head>
 <body>
-    <div class="container-fluid layout rounded h-100">
-        <div class="row h-100 g-0 flex-nowrap bg-white">
-            <aside class="col-auto d-none d-md-flex p-0" aria-label="Desktop sidebar">
-                <div class="sidebar d-flex flex-column h-100 p-1">
-                    <div class="d-flex align-items-center gap-2 mb-3 pb-3 border-bottom">
-                        <img src="assets/media/BornelabsLogo.png" class="logo" alt="Bornelabs logo">
-                        <span class="navbar-brand fw-bold text-dark mb-0" id="bornelabs">Bornelabs</span>
+    <div class="layout-shell">
+        <aside class="sidebar d-none d-md-flex" aria-label="Primary navigation">
+            <div class="sidebar-top">
+                <a class="brand" href="/home" data-page="home" aria-label="Go to home">
+                    <img src="assets/media/BornelabsLogo.png" class="brand-logo" alt="BorneLabs logo">
+                    <span class="brand-name">BorneLabs</span>
+                </a>
+
+                <hr class="section-divider">
+
+                <nav class="sidebar-nav" aria-label="Site pages">
+                    <a href="/home" class="nav-item" data-page="home"><i class="bi bi-house-door"></i><span>Home</span></a>
+                    <a href="/projects" class="nav-item" data-page="projects"><i class="bi bi-kanban"></i><span>Projects</span></a>
+                    <a href="/services" class="nav-item" data-page="services"><i class="bi bi-gear"></i><span>Services</span></a>
+                    <a href="/about" class="nav-item" data-page="about"><i class="bi bi-info-circle"></i><span>About</span></a>
+                    <a href="/contacts" class="nav-item" data-page="contacts"><i class="bi bi-telephone"></i><span>Contacts</span></a>
+                    <a href="/papers" class="nav-item" data-page="papers"><i class="bi bi-file-earmark-text"></i><span>Papers</span></a>
+                    <a href="/more" class="nav-item" data-page="more"><i class="bi bi-three-dots"></i><span>More</span></a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-social" aria-label="Social links">
+                    <a href="https://www.linkedin.com/company/bornelabs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://wa.me/254740125210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                    <a href="https://github.com/BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="https://www.youtube.com/@BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
+                <p class="sidebar-note">Connect With Us</p>
+                <p class="sidebar-note sidebar-copyright">&copy; 2025 BorneLabs</p>
+            </div>
+        </aside>
+
+        <main class="main-shell" id="mainContent">
+            <div class="mobile-top d-md-none">
+                <nav class="navbar navbar-light bg-white border-bottom px-3 py-2">
+                    <div class="d-flex align-items-center w-100">
+                        <img src="assets/media/BornelabsLogo.png" class="brand-logo me-2" alt="BorneLabs logo">
+                        <span class="brand-name">BorneLabs</span>
+                        <button class="navbar-toggler ms-auto" id="mobileMenuToggle" type="button" aria-controls="mobileDrawer" aria-expanded="false" aria-label="Toggle menu">
+                            <i class="bi bi-list fs-4"></i>
+                        </button>
+                    </div>
+                </nav>
+
+                <div class="mobile-overlay" id="mobileOverlay" hidden></div>
+
+                <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+                    <div class="mobile-drawer-head">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/media/BornelabsLogo.png" class="brand-logo me-2" alt="BorneLabs logo">
+                            <span class="brand-name">BorneLabs</span>
+                        </div>
+                        <button class="btn btn-sm" id="mobileDrawerClose" type="button" aria-label="Close menu">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
                     </div>
 
-                    <nav class="d-flex flex-column flex-grow-1" aria-label="Primary navigation">
-                        <ul class="nav flex-column gap-2 flex-grow-1 NavLinks">
-                            <li class="nav-item p-1">
-                                <a href="/home" class="nav-link active rounded fw-bold" data-page="Home">
-                                    <i class="bi bi-house-door me-2"></i> Home
-                                </a>
-                            </li>
-                            <li class="nav-item p-1">
-                                <a href="/projects" class="nav-link rounded fw-bold" data-page="Projects">
-                                    <i class="bi bi-kanban me-2"></i> Projects
-                                </a>
-                            </li>
-                            <li class="nav-item p-1">
-                                <a href="/services" class="nav-link rounded fw-bold" data-page="Services">
-                                    <i class="bi bi-gear me-2"></i> Services
-                                </a>
-                            </li>
-                            <li class="nav-item p-1">
-                                <a href="/contacts" class="nav-link rounded fw-bold" data-page="Contacts">
-                                    <i class="bi bi-telephone me-2"></i> Contacts
-                                </a>
-                            </li>
-                            <li class="nav-item p-1">
-                                <a href="/about" class="nav-link rounded fw-bold" data-page="About">
-                                    <i class="bi bi-info-circle me-2"></i> About
-                                </a>
-                            </li>
-                            <li class="nav-item p-1">
-                                <a href="/more" class="nav-link rounded fw-bold" data-page="More">
-                                    <i class="bi bi-three-dots me-2"></i> More
-                                </a>
-                            </li>
-                        </ul>
+                    <nav class="mobile-menu-list" aria-label="Mobile pages">
+                        <a href="/home" class="mobile-nav-item" data-page="home"><i class="bi bi-house-door"></i><span>Home</span></a>
+                        <a href="/projects" class="mobile-nav-item" data-page="projects"><i class="bi bi-kanban"></i><span>Projects</span></a>
+                        <a href="/services" class="mobile-nav-item" data-page="services"><i class="bi bi-gear"></i><span>Services</span></a>
+                        <a href="/about" class="mobile-nav-item" data-page="about"><i class="bi bi-info-circle"></i><span>About</span></a>
+                        <a href="/contacts" class="mobile-nav-item" data-page="contacts"><i class="bi bi-telephone"></i><span>Contacts</span></a>
+                        <a href="/papers" class="mobile-nav-item" data-page="papers"><i class="bi bi-file-earmark-text"></i><span>Papers</span></a>
+                        <a href="/more" class="mobile-nav-item" data-page="more"><i class="bi bi-three-dots"></i><span>More</span></a>
                     </nav>
-                </div>
-            </aside>
 
-            <main class="col d-flex flex-column h-100 p-0">
-                <div class="d-md-none">
-                    <nav class="navbar navbar-light bg-light p-2">
-                        <div class="d-flex align-items-center w-100">
-                            <img src="assets/media/BornelabsLogo.png" class="logo me-2" alt="Bornelabs logo">
-                            <span class="navbar-brand fw-bold mb-0">Bornelabs</span>
-                            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+                    <div class="mobile-drawer-foot">
+                        <div class="sidebar-social" aria-label="Mobile social links">
+                            <a href="https://www.linkedin.com/company/bornelabs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://wa.me/254740125210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://github.com/BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                            <a href="https://www.youtube.com/@BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                         </div>
-                        <div class="collapse" id="mobileMenu">
-                            <ul class="nav flex-column mt-3">
-                                <li class="nav-item p-1">
-                                    <a href="/home" class="nav-link active rounded fw-bold" data-page="Home">Home</a>
-                                </li>
-                                <li class="nav-item p-1">
-                                    <a href="/projects" class="nav-link rounded fw-bold" data-page="Projects">Projects</a>
-                                </li>
-                                <li class="nav-item p-1">
-                                <a href="/services" class="nav-link rounded fw-bold" data-page="Services">Services</a> 
-                                </li>
-                                <li class="nav-item p-1">
-                                    <a href="/contacts" class="nav-link rounded fw-bold" data-page="Contacts">Contacts</a>
-                                </li>
-                                <li class="nav-item p-1">
-                                    <a href="/about" class="nav-link rounded fw-bold" data-page="About">About</a>
-                                </li>
-                                <li class="nav-item p-1">
-                                    <a href="/more" class="nav-link rounded fw-bold" data-page="More">More</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-
-                <div class="main flex-grow-1 mb-5">
-                    <div id="content" data-include="Pages/home.html">
-                        <div class="d-flex justify-content-center align-items-center text-start py-3 px-2 g-5">
-                            <div class="spinner-border me-2" role="status" aria-hidden="true"></div>
-                            <strong>Loading</strong>
-                        </div>
+                        <p class="sidebar-note">Connect With Us</p>
                     </div>
+                </aside>
+            </div>
+
+            <div class="main" id="mainScroll">
+                <div id="content" class="content-root" data-include="Pages/home.html" role="region" aria-live="polite">
+                    <div class="loading-state" role="status" aria-label="Loading page content">Loading content...</div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
 
     <script src="assets/js/include.js"></script>

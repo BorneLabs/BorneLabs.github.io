@@ -1,0 +1,260 @@
+@media (max-width: 1199px) {
+  .services-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #video-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-member-grid,
+  .about-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 991.98px) {
+  .about-intro-grid,
+  .about-info-grid,
+  .about-wings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --content-pad: var(--space-3);
+    --section-gap: var(--space-5);
+  }
+
+  .main-shell {
+    margin-left: 0;
+    min-height: 100dvh;
+  }
+
+  .mobile-top {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: var(--surface);
+  }
+
+  .mobile-top .navbar {
+    padding: 0.4rem 0.75rem !important;
+    min-height: 52px;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--mobile-backdrop);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 130;
+  }
+
+  .mobile-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(54vw, 320px);
+    min-width: 248px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    box-shadow: 0 10px 24px var(--mobile-shadow);
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    z-index: 140;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+
+  .mobile-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-3);
+  }
+
+  .sticky-top.bg-white {
+    background: transparent !important;
+  }
+
+  .mobile-drawer-head .brand-name {
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .mobile-nav-item {
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 0.62rem 0.7rem;
+    color: var(--text-soft);
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .mobile-nav-item.active {
+    background: var(--surface-warm);
+    border-color: var(--border-warm);
+    box-shadow: inset 3px 0 0 var(--accent);
+    font-weight: 600;
+  }
+
+  .mobile-drawer-foot {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-4);
+  }
+
+  .main {
+    height: auto;
+    min-height: calc(100dvh - 58px);
+  }
+
+  .content-root {
+    width: 100%;
+  }
+
+  .page-header h1,
+  .section-title {
+    font-size: 1.42rem;
+  }
+
+  .hero-section {
+    min-height: 240px;
+    padding: var(--space-6);
+  }
+
+  .hero-content h1 {
+    font-size: 1.95rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .services-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-card {
+    min-height: 152px;
+  }
+
+  #video-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-row {
+    grid-template-columns: 50px minmax(0, 1fr);
+    min-height: 88px;
+  }
+
+  .project-cta {
+    display: none;
+  }
+
+  .social-links {
+    display: none;
+  }
+
+  .modal-dialog {
+    padding: var(--space-1);
+  }
+
+  .modal-body {
+    padding: var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .services-track,
+  #video-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    border-radius: 10px;
+    padding: var(--space-5);
+  }
+
+  .mobile-drawer {
+    width: min(62vw, 290px);
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #projectModal .modal-dialog {
+    max-width: calc(100vw - 1rem);
+    margin: 0.5rem auto;
+  }
+
+  #projectModal .project-modal-header,
+  #projectModal .project-modal-content-wrap {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #projectModal .project-modal-header {
+    padding-top: 0.9rem;
+    padding-bottom: 0.8rem;
+  }
+
+  #projectModal .project-modal-header-main {
+    gap: 0.7rem;
+  }
+
+  #projectModal .project-modal-title {
+    font-size: 1.35rem;
+  }
+
+  #projectModal .project-modal-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  #projectModal .project-modal-description {
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+
+  #projectModal .project-modal-image-frame {
+    padding: 0.6rem;
+  }
+}
+
+[data-current-page="home"] #Home-Services {
+  margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,123 +1,142 @@
 <section class="page-header">
     <h1>Home</h1>
-    <div class="social-links">
-        <a href="https://www.linkedin.com/company/bornelabs" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb06NZiHltYEOS61j33O" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        <a href="https://github.com/BorneLabs" title="GitHub"><i class="bi bi-github"></i></a>
-        <a href="https://www.youtube.com/@BorneLabs" title="YouTube"><i class="bi bi-youtube"></i></a>
-    </div>
 </section>
 <hr class="section-divider">
 
-<div class="hero-section" style="background-image: url('assets/media/hero.jpg');">
-  <div class="hero-content">
-    <h1>We Do Projects</h1>
-    <p>If you're interested in joining our team, we'd love to hear from you.</p>
-    <p class="small text-white-50">Email us at contact@bornelabs.org</p>
+<div class="hero-section hero-home">
+    <div class="hero-content">
+      <h1>We Do Projects</h1>
+      <p>If you're interested in joining our team, we'd love to hear from you.</p>
+      <p class="small text-white-50">Email us at contact@bornelabs.org</p>
+    </div>
   </div>
-</div>
 
-<section class="page-section" id="Home-Services">
-  <div class="services-marquee">
-    <div class="services-track">
+  <section class="page-section" id="Home-Services">
+    <h2 class="section-title">Services</h2>
+    <hr class="section-divider">
+    <div class="section-content-box">
+      <div class="services-marquee">
+        <div class="services-track">
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
+        <a class="service-item" data-page="services" role="button">
         <div class="card service-card d-flex justify-content-center align-items-center text-center">
           <i class="bi bi-laptop fs-1 mb-2"></i>
           <div class="small fw-semibold">Static &amp; Fullstack Websites</div>
         </div>
       </a>
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-        <div class="card service-card d-flex justify-content-center align-items-center text-center">
-          <i class="bi bi-phone fs-1 mb-2"></i>
-          <div class="small fw-semibold">Native Mobile Apps &amp; PWAs</div>
-        </div>
-      </a>
+        <a class="service-item" data-page="services" role="button">
+          <div class="card service-card d-flex justify-content-center align-items-center text-center">
+            <i class="bi bi-phone fs-1 mb-2"></i>
+            <div class="small fw-semibold">Native Mobile Apps &amp; PWAs</div>
+          </div>
+        </a>
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-        <div class="card service-card d-flex justify-content-center align-items-center text-center">
-          <i class="bi bi-robot fs-1 mb-2"></i>
-          <div class="small fw-semibold">AI Inference &amp; Integration</div>
-        </div>
-      </a>
+        <a class="service-item" data-page="services" role="button">
+          <div class="card service-card d-flex justify-content-center align-items-center text-center">
+            <i class="bi bi-robot fs-1 mb-2"></i>
+            <div class="small fw-semibold">AI Inference &amp; Integration</div>
+          </div>
+        </a>
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-        <div class="card service-card d-flex justify-content-center align-items-center text-center">
-          <i class="bi bi-github fs-1 mb-2"></i>
-          <div class="small fw-semibold">Collaborative Open Source</div>
-        </div>
-      </a>
+        <a class="service-item" data-page="services" role="button">
+          <div class="card service-card d-flex justify-content-center align-items-center text-center">
+            <i class="bi bi-github fs-1 mb-2"></i>
+            <div class="small fw-semibold">Collaborative Open Source</div>
+          </div>
+        </a>
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-        <div class="card service-card d-flex justify-content-center align-items-center text-center">
-          <i class="bi bi-people fs-1 mb-2"></i>
-          <div class="small fw-semibold">Project Management &amp; Partnerships</div>
-        </div>
-      </a>
+        <a class="service-item" data-page="services" role="button">
+          <div class="card service-card d-flex justify-content-center align-items-center text-center">
+            <i class="bi bi-people fs-1 mb-2"></i>
+            <div class="small fw-semibold">Project Management &amp; Partnerships</div>
+          </div>
+        </a>
 
-      <a class="service-item" data-page="services" role="button" style="cursor: pointer;">
-        <div class="card service-card d-flex justify-content-center align-items-center text-center">
-          <i class="bi bi-palette fs-1 mb-2"></i>
-          <div class="small fw-semibold">Graphic Design</div>
-        </div>
-      </a>
+        <a class="service-item" data-page="services" role="button">
+          <div class="card service-card d-flex justify-content-center align-items-center text-center">
+            <i class="bi bi-palette fs-1 mb-2"></i>
+            <div class="small fw-semibold">Graphic Design</div>
+          </div>
+        </a>
 
+      </div>
     </div>
-  </div>
-</section>
+    </div>
+  </section>
 
-<section class="page-section" id="Home-Featured-Projects">
-  <div class="page-container">
+  <section class="page-section" id="Home-Featured-Projects">
     <h1 class="section-title">Featured Projects</h1>
     <hr class="section-divider">
-    <div class="row g-4 justify-content-left" id="featured-projects"></div>
-  </div>
+    <div class="section-content-box">
+      <div class="page-container">
+        <div class="row g-4 justify-content-left" id="featured-projects"></div>
+      </div>
+    </div>
 
-  <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-      <div class="modal-content" style="max-height:90vh;">
-        <div class="modal-body p-0 overflow-hidden position-relative">
-          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
-          <div class="p-4" id="modalContent"></div>
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div id="modalContent"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="page-section" id="Home-Education">
-  <div class="page-container">
+  <section class="page-section" id="Home-Education">
     <h2 class="section-title">Education Resources</h2>
     <hr class="section-divider">
+    <div class="section-content-box">
+      <div class="page-container">
+        <div class="row g-4 justify-content-left" id="video-cards"></div>
+      </div>
+    </div>
 
-    <div class="row g-4 justify-content-left" id="video-cards"></div>
-  </div>
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <article class="video-modal-shell" aria-label="Video player modal">
+              <header class="video-modal-header">
+                <div class="video-modal-header-main">
+                  <div class="video-modal-icon" aria-hidden="true">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </div>
+                  <div class="video-modal-heading">
+                    <div class="video-modal-kicker">Featured Video</div>
+                    <h2 class="section-title video-modal-title" id="videoModalTitle">Video</h2>
+                  </div>
+                </div>
+                <button type="button" class="video-modal-close" data-bs-dismiss="modal" aria-label="Close video">
+                  <i class="bi bi-x-lg" aria-hidden="true"></i>
+                </button>
+              </header>
 
-  <!-- Modal -->
-  <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"></button>
+              <div class="video-modal-content-wrap">
+                <div class="video-modal-frame">
+                  <iframe id="modalVideo" src="" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                </div>
 
-          <div class="ratio ratio-16x9">
-            <iframe id="modalVideo" src="" title="YouTube video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-modal-summary">
+                  <span class="tag video-modal-tag">BorneLabs</span>
+                </div>
+              </div>
+            </article>
           </div>
-
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<section class="page-section" id="Home-Plans">
-  <div class="page-container">
+  <section class="page-section" id="Home-Plans">
     <h2 class="section-title">Want us to work on your Projects?</h2>
     <hr class="section-divider">
-
-    <div class="row g-3">
+    <div class="section-content-box">
+      <div class="page-container">
+        <div class="row g-3">
 
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card">
@@ -173,6 +192,6 @@
         </div>
       </div>
 
+      </div>
     </div>
-  </div>
-</section>
+  </section>

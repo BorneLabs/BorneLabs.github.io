@@ -1,0 +1,335 @@
+.layout-shell {
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4);
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+.brand-logo {
+  width: 2.1rem;
+  height: 2.1rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.68rem 0.72rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-item i {
+  font-size: 1rem;
+  color: var(--text-icon);
+}
+
+.nav-item:hover {
+  background: var(--surface-subtle);
+  border-color: var(--border-soft);
+}
+
+.nav-item.active {
+  background: var(--surface-alt);
+  border-color: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+  font-weight: 600;
+}
+
+.nav-item.active i {
+  color: var(--accent);
+}
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-4);
+}
+
+.sidebar-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.sidebar-social a {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-strong);
+}
+
+.sidebar-social a:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-subtle);
+}
+
+.sidebar-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.sidebar-copyright {
+  margin-top: var(--space-2);
+}
+
+.main-shell {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-top {
+  display: none;
+}
+
+#mobileMenuToggle {
+  border: 0;
+  padding: 0.15rem;
+  line-height: 1;
+}
+
+#mobileMenuToggle:focus {
+  box-shadow: none;
+}
+
+.main {
+  height: 100vh;
+  overflow-y: auto;
+  padding: var(--content-pad);
+}
+
+.content-root {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+}
+
+.loading-state {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  color: var(--text-muted);
+}
+
+.page-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container .container {
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--heading-gap);
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.1vw, 2rem);
+  font-weight: 700;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.social-links a {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-soft);
+}
+
+.section-divider {
+  border: 0;
+  border-top: 1px solid var(--divider-soft);
+  opacity: 1;
+  margin: 0.5rem 0 clamp(1rem, 1.5vw, 1.4rem);
+}
+
+.page-section {
+  margin: 0 0 clamp(2.5rem, 4vw, 3.25rem);
+}
+
+.page-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-content-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: clamp(var(--space-5), 2vw, var(--space-6));
+  box-shadow: var(--shadow);
+}
+
+.section-heading {
+  margin-bottom: clamp(var(--space-3), 2vw, var(--space-4));
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  min-height: 300px;
+  padding: var(--space-7) var(--space-7);
+  margin-bottom: var(--section-gap);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--hero-overlay-dark) 0%, var(--hero-overlay-mid) 48%, var(--hero-overlay-warm) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  color: var(--surface);
+}
+
+.hero-content h1 {
+  margin: 0 0 var(--space-3);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hero-content h1::after {
+  content: "";
+  display: block;
+  width: 4.4rem;
+  height: 0.18rem;
+  border-radius: 999px;
+  margin-top: var(--space-3);
+  background: var(--accent);
+}
+
+.hero-content p {
+  margin: 0;
+  font-size: 1.03rem;
+  color: var(--hero-text-soft);
+}
+
+.hero-content .small {
+  margin-top: var(--space-3);
+  color: var(--hero-text-muted) !important;
+}
+
+.section-title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  font-weight: 750;
+  color: var(--text);
+}
+
+.section-title + .section-divider {
+  margin-top: 0;
+}
+
+#Home-Services .section-title,
+#Home-Featured-Projects .section-title,
+#Home-Education .section-title,
+#Home-Plans .section-title {
+  margin-bottom: var(--heading-gap);
+}
+
+.text-body-md,
+.text-body-lg,
+.text-body-sm,
+p,
+li {
+  color: var(--text-subtle);
+}
+
+.text-body-lg {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.text-body-md {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.text-body-sm {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.text-muted-custom {
+  color: var(--text-muted);
+}
