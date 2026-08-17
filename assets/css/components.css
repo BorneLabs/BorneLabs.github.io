@@ -473,53 +473,41 @@
 }
 
 .services-nav-shell {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-3) var(--space-4);
-  margin-top: 0;
-  margin-bottom: var(--space-4);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
+  width: 100%;
+  margin: 0 0 var(--space-4);
+  overflow: hidden;
 }
 
 .services-marquee {
   width: 100%;
-  padding: var(--space-3) 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  padding-bottom: 2px;
 }
 
 .services-marquee::-webkit-scrollbar {
   display: none;
 }
 
-.services-marquee::-webkit-scrollbar-track {
-  display: none;
-}
-
-.services-marquee::-webkit-scrollbar-thumb {
-  display: none;
-}
-
 .services-track {
-  display: flex;
-  gap: var(--space-4);
+  display: inline-flex;
   align-items: center;
-  width: fit-content;
-  padding: 0 var(--space-4);
+  gap: var(--space-3);
+  width: max-content;
+  max-width: max-content;
+  padding: 0;
+  white-space: nowrap;
 }
 
 .tag-link {
+  flex: 0 0 auto;
   display: inline-flex;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
 }
@@ -527,35 +515,50 @@
 .tag-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
+  padding: 0.45rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface-soft);
   color: var(--text-soft);
-  padding: 0.55rem 0.9rem;
   font-size: 0.82rem;
   font-weight: 600;
   line-height: 1.2;
   white-space: nowrap;
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition);
 }
 
 .tag-link:hover .tag-pill {
   background: var(--surface);
   border-color: var(--border-strong);
-  transform: translateY(-1px);
+  color: var(--text);
+}
+
+.tag-link:focus-visible {
+  outline: none;
+}
+
+.tag-link:focus-visible .tag-pill {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+  box-shadow: 0 0 0 2px var(--accent-glow);
 }
 
 .tag-link.active .tag-pill {
   background: var(--accent-soft);
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent-soft);
 }
 
 .tag-link i {
   color: inherit;
 }
+
 
 .service-section {
   margin-top: 0;

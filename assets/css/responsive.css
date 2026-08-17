@@ -87,10 +87,6 @@
     padding-bottom: var(--space-3);
   }
 
-  .sticky-top.bg-white {
-    background: transparent !important;
-  }
-
   .mobile-drawer-head .brand-name {
     font-size: 1.2rem;
   }
@@ -132,6 +128,8 @@
 
   .content-root {
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .page-header h1,
@@ -152,9 +150,22 @@
     font-size: 0.95rem;
   }
 
-  .services-track {
-    gap: var(--space-3);
-    padding: 0 var(--space-2);
+  .services-nav-shell {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .services-marquee {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .tag-pill {
+    padding: 0.42rem 0.68rem;
+    font-size: 0.78rem;
   }
 
   .service-item {
@@ -194,25 +205,7 @@
   .modal-body {
     padding: var(--space-3);
   }
-}
 
-@media (max-width: 480px) {
-  #video-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-section {
-    border-radius: 10px;
-    padding: var(--space-5);
-  }
-
-  .mobile-drawer {
-    width: min(62vw, 290px);
-    min-width: 220px;
-  }
-}
-
-@media (max-width: 767.98px) {
   #projectModal .modal-dialog {
     max-width: calc(100vw - 1rem);
     margin: 0.5rem auto;
@@ -249,6 +242,22 @@
 
   #projectModal .project-modal-image-frame {
     padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #video-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    border-radius: 10px;
+    padding: var(--space-5);
+  }
+
+  .mobile-drawer {
+    width: min(62vw, 290px);
+    min-width: 220px;
   }
 }
 
