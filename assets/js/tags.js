@@ -71,4 +71,95 @@ function initServiceTags() {
   setActive(currentHash);
 }
 
+function initMarqueeOverflow() {
+  const marquees = document.querySelectorAll(".services-marquee");
+  
+  if (!marquees.length) {
+    return;
+  }
+
+  const marqueeStates = new WeakMap();
+
+  function checkAndStartOverflow(marquee) {
+    const track = marquee.querySelector(".services-track");
+    if (!track) return;
+
+    const marqueeWidth = marquee.clientWidth;
+    const trackWidth = track.scrollWidth;
+    const hasOverflow = trackWidth > marqueeWidth;
+    let state = marqueeStates.get(marquee) || { animationId: null, isAnimating: false };
+
+    if (hasOverflow && !state.isAnimating) {
+      state.isAnimating = true;
+      marqueeStates.set(marquee, state);
+      startSmoothScroll(marquee, marqueeWidth, trackWidth);
+    } else if (!hasOverflow && state.animationId) {
+      cancelAnimationFrame(state.animationId);
+      state.isAnimating = false;
+      marquee.scrollLeft = 0;
+      marqueeStates.set(marquee, state);
+    }
+  }
+
+  function startSmoothScroll(marquee, marqueeWidth, trackWidth) {
+    const scrollRange = trackWidth - marqueeWidth;
+    const scrollDuration = scrollRange * 30; // 30ms per pixel
+    const startTime = Date.now();
+    const state = marqueeStates.get(marquee) || {};
+    let isPaused = false;
+
+    marquee.addEventListener("mouseenter", () => {
+      isPaused = true;
+    }, { once: false, passive: true });
+
+    marquee.addEventListener("mouseleave", () => {
+      isPaused = false;
+    }, { once: false, passive: true });
+
+    function animateScroll() {
+      if (!isPaused) {
+        const elapsed = Date.now() - startTime;
+        const progress = (elapsed % (scrollDuration * 2)) / scrollDuration;
+
+        if (progress <= 1) {
+          // Scroll forward
+          marquee.scrollLeft = scrollRange * progress;
+        } else {
+          // Scroll back
+          marquee.scrollLeft = scrollRange * (2 - progress);
+        }
+      }
+
+      const newAnimationId = requestAnimationFrame(animateScroll);
+      state.animationId = newAnimationId;
+      marqueeStates.set(marquee, state);
+    }
+
+    animateScroll();
+  }
+
+  function checkAllOverflow() {
+    marquees.forEach((marquee) => {
+      checkAndStartOverflow(marquee);
+    });
+  }
+
+  // Check on load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", checkAllOverflow);
+  } else {
+    checkAllOverflow();
+  }
+
+  // Re-check on resize
+  window.addEventListener("resize", checkAllOverflow);
+
+  // Re-check when content changes
+  const observer = new MutationObserver(checkAllOverflow);
+  marquees.forEach((marquee) => {
+    observer.observe(marquee, { childList: true, subtree: true });
+  });
+}
+
 window.initServiceTags = initServiceTags;
+window.initMarqueeOverflow = initMarqueeOverflow;

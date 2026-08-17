@@ -14,10 +14,89 @@
   <link rel="stylesheet" href="assets/css/root.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
   <div class="layout-shell">
+    <aside class="sidebar d-none d-md-flex" aria-label="Primary navigation">
+      <div class="sidebar-top">
+        <a class="brand" href="/" aria-label="Go to home">
+          <img src="assets/media/BornelabsLogo.png" class="brand-logo" alt="BorneLabs logo">
+          <span class="brand-name">BorneLabs</span>
+        </a>
+
+        <hr class="section-divider">
+
+        <nav class="sidebar-nav" aria-label="Site pages">
+          <a href="/" class="nav-item" data-page="home"><i class="bi bi-house-door"></i><span>Home</span></a>
+          <a href="/projects" class="nav-item" data-page="projects"><i class="bi bi-kanban"></i><span>Projects</span></a>
+          <a href="/services" class="nav-item" data-page="services"><i class="bi bi-gear"></i><span>Services</span></a>
+          <a href="/about" class="nav-item" data-page="about"><i class="bi bi-info-circle"></i><span>About</span></a>
+          <a href="/contacts" class="nav-item" data-page="contacts"><i class="bi bi-telephone"></i><span>Contacts</span></a>
+          <a href="/papers" class="nav-item" data-page="papers"><i class="bi bi-file-earmark-text"></i><span>Papers</span></a>
+          <a href="/more" class="nav-item" data-page="more"><i class="bi bi-three-dots"></i><span>More</span></a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-social" aria-label="Social links">
+          <a href="https://www.linkedin.com/company/bornelabs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://wa.me/254740125210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="https://github.com/BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="https://www.youtube.com/@BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+        <p class="sidebar-note">Connect With Us</p>
+        <p class="sidebar-note sidebar-copyright">&copy; 2025 BorneLabs</p>
+      </div>
+    </aside>
+
     <main class="main-shell" aria-label="404 page">
+      <div class="mobile-top d-md-none">
+        <nav class="navbar navbar-light bg-white border-bottom px-3 py-2">
+          <div class="d-flex align-items-center w-100">
+            <img src="assets/media/BornelabsLogo.png" class="brand-logo me-2" alt="BorneLabs logo">
+            <span class="brand-name">BorneLabs</span>
+            <button class="navbar-toggler ms-auto" id="mobileMenuToggle" type="button" aria-controls="mobileDrawer" aria-expanded="false" aria-label="Toggle menu">
+              <i class="bi bi-list fs-4"></i>
+            </button>
+          </div>
+        </nav>
+
+        <div class="mobile-overlay" id="mobileOverlay" hidden></div>
+
+        <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+          <div class="mobile-drawer-head">
+            <div class="d-flex align-items-center">
+              <img src="assets/media/BornelabsLogo.png" class="brand-logo me-2" alt="BorneLabs logo">
+              <span class="brand-name">BorneLabs</span>
+            </div>
+            <button class="btn btn-sm" id="mobileDrawerClose" type="button" aria-label="Close menu">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+
+          <nav class="mobile-menu-list" aria-label="Mobile pages">
+            <a href="/" class="mobile-nav-item" data-page="home"><i class="bi bi-house-door"></i><span>Home</span></a>
+            <a href="/projects" class="mobile-nav-item" data-page="projects"><i class="bi bi-kanban"></i><span>Projects</span></a>
+            <a href="/services" class="mobile-nav-item" data-page="services"><i class="bi bi-gear"></i><span>Services</span></a>
+            <a href="/about" class="mobile-nav-item" data-page="about"><i class="bi bi-info-circle"></i><span>About</span></a>
+            <a href="/contacts" class="mobile-nav-item" data-page="contacts"><i class="bi bi-telephone"></i><span>Contacts</span></a>
+            <a href="/papers" class="mobile-nav-item" data-page="papers"><i class="bi bi-file-earmark-text"></i><span>Papers</span></a>
+            <a href="/more" class="mobile-nav-item" data-page="more"><i class="bi bi-three-dots"></i><span>More</span></a>
+          </nav>
+
+          <div class="mobile-drawer-foot">
+            <div class="sidebar-social" aria-label="Mobile social links">
+              <a href="https://www.linkedin.com/company/bornelabs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://wa.me/254740125210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+              <a href="https://github.com/BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://www.youtube.com/@BorneLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+            <p class="sidebar-note">Connect With Us</p>
+          </div>
+        </aside>
+      </div>
+
       <div class="main">
         <div class="content-root">
           <section class="page-header">
@@ -25,21 +104,21 @@
           </section>
 
           <section class="page-section">
-            <div class="card about-page-shell">
-              <div class="text-center py-5 px-3">
+            <div class="card about-page-shell not-found-shell">
+              <div class="text-center py-5 px-3 not-found-content">
                 <div class="mb-3">
-                  <span class="badge rounded-pill px-3 py-2" style="background: var(--accent-soft); color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
+                  <span class="badge rounded-pill px-3 py-2 not-found-badge">
                     <i class="bi bi-exclamation-circle me-2"></i>Page Not Found
                   </span>
                 </div>
 
-                <h2 class="section-title mb-3">We couldn’t find that page.</h2>
-                <p class="mb-4 text-muted mx-auto" style="max-width: 640px; line-height: 1.7;">
+                <h2 class="section-title mb-3 not-found-title">We couldn’t find that page.</h2>
+                <p class="mb-4 text-muted mx-auto not-found-copy">
                   The page you requested may have moved, been removed, or the link may be incorrect.
                   Let’s get you back to the BorneLabs homepage.
                 </p>
 
-                <div class="d-flex flex-wrap justify-content-center gap-3">
+                <div class="d-flex flex-wrap justify-content-center gap-3 not-found-actions">
                   <a class="btn btn-primary-custom" href="/">
                     <i class="bi bi-house-door me-2"></i>Back To Home
                   </a>

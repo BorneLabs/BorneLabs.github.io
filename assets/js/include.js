@@ -79,6 +79,10 @@
         initServiceTags();
       }
 
+      if (typeof initMarqueeOverflow === "function") {
+        initMarqueeOverflow();
+      }
+
       if (scrollRoot) {
         scrollRoot.scrollTo({ top: 0, behavior: "auto" });
       }
